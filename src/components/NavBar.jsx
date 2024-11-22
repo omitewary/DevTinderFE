@@ -22,7 +22,6 @@ const NavBar = () => {
     }
   };
 
-  const userData = user?.data;
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
@@ -30,9 +29,9 @@ const NavBar = () => {
           🧑🏼‍💻 DevTinder
         </Link>
       </div>
-      {userData && (
+      {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">Welcome, {userData.firstName}</div>
+          <div className="form-control">Welcome, {user.firstName}</div>
           <div className="dropdown dropdown-end mx-5 flex">
             <div
               tabIndex={0}
@@ -40,7 +39,7 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="user photo" src={userData.photoUrl} />
+                <img alt="user photo" src={user.photoUrl} />
               </div>
             </div>
             <ul

@@ -13,13 +13,14 @@ const Requests = () => {
       const res = await axios.get(`${BASE_URL}/user/requests/received`, {
         withCredentials: true,
       });
-      dispatch(addRequests(res.data));
+      dispatch(addRequests(res.data?.data));
     } catch (error) {
       console.error(error);
     }
   };
 
   const reviewRequest = async (status, _id) => {
+    console.log("ID : ", _id);
     try {
       await axios.post(
         `${BASE_URL}/request/review/${status}/${_id}`,
@@ -28,6 +29,7 @@ const Requests = () => {
           withCredentials: true,
         }
       );
+
       dispatch(removeRequests(_id));
     } catch (error) {
       console.error(error);
@@ -38,9 +40,9 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests?.data) return;
+  if (!requests) return;
 
-  if (requests?.data?.length === 0)
+  if (requests?.length === 0)
     return (
       <h1 className="flex justify-center my-10 text-bold text-2xl">
         No Request received
@@ -50,7 +52,7 @@ const Requests = () => {
   return (
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Requests</h1>
-      {requests.data.map((request) => {
+      {requests.map((request) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
           request?.fromUserId;
         return (

@@ -7,7 +7,7 @@ const Profle = () => {
 
   return (
     <div>
-      <EditProfile user={user?.data} />
+      <EditProfile user={user} />
     </div>
   );
 };
